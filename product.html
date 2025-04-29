@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Product Details</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #f8f4e3;
+      color: #333;
+    }
+    .container {
+      max-width: 800px;
+      margin: 10px auto;
+      padding: 10px;
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      text-align: center;
+    }header {
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+/* nav{
+   display: flex; justify-content: center; align-items: center;
+}
+nav a{
+  color: white; font-size: 20px; ; text-decoration: none;padding: 0 40px ;
+  
+} */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px 0;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  border-top: 1px solid #eee;
+}
+
+nav a {
+  color: #4f371c;
+  font-size: 20px;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+nav a:hover,
+nav a:focus {
+  color: #c86a00; /* لون عند التفاعل - وردي جذاب */
+}
+
+nav a.active {
+  color: #4f371c; /* لون العنصر النشط */
+}
+.location {
+  font-size: 14px;
+}
+
+    img {
+      width: 35%;
+      object-fit: cover;
+      border-radius: 10px;    }
+    .price {
+      color: #4f371c;
+      font-size: 22px;
+      font-weight: bold;
+    }
+    h1 {
+      font-size: 26px;
+      color: #000;
+    }
+    .section-title {
+      font-size: 20px;
+      color: #4f371c;
+    }
+    .details, .reviews {
+      font-size: 16px;
+      line-height: 1.6;
+      color: #555;
+      margin-bottom: 20px;
+    }
+    .btn-container {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    }
+    .btn {
+      padding: 10px 20px;
+      background-color: #4f371c;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .btn:hover {
+      background-color: #3a2915;
+    }
+    .favorite-btn.active {
+      background-color: red;
+    }
+    a.back {
+      display: inline-block;
+      margin-left: 30px;
+      padding: 10px 20px;
+      color: #4f371c;
+      text-decoration: none;
+      border: 1px solid #4f371c4f;
+      border-radius: 50%;
+      font-size: larger;
+    }
+    a.back:hover {
+      background-color: #3a2915;      color: white;
+
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="location">
+     <p><b>Location</b><br> Bosher, Oman</p>
+   </div>
+
+   <nav>
+     <div class="location">
+       <p><b>Location</b><br> Bosher, Oman</p>
+     </div>
+ 
+     <a href="home.html" title="Home"><i class="fas fa-home"></i></a>
+     <a href="products.html" title="Products"><i class="fas fa-box-open"></i></a>
+     <a href="favorites.html" title="Favorites"><i class="fas fa-heart"></i></a>
+     <a href="login.html" title="Account"><i class="fas fa-user"></i></a><div>
+       <a href="cart.html" title="Cart"><i class="fas fa-shopping-cart"></i></a>
+</nav>
+   
+  
+   
+ </header>
+
+  <div class="container">
+ <div  style="display: flex; justify-content: flex-start;"> <a href="products.html" class="back">←</a></div>  
+    <img id="productImage" src="" alt="Product Image">
+    <div class="price" id="productPrice"></div>
+    <h1 id="productName"></h1>
+
+    <div class="section-title">Product Details</div>
+    <div class="details">
+      <p id="productDesc">Loading...</p>
+    </div>
+
+    <div class="section-title">Customer Reviews</div>
+    <div class="reviews">
+      ★★★★★ 4.5 (12 reviews)
+    </div>
+
+    <div class="btn-container">
+      <button class="btn favorite-btn" onclick="addToFavorites()">❤️ Add to Favorites</button>
+      <button class="btn" onclick="addToCart()">🛒 Add to Cart</button>
+    </div>
+
+  </div>
+
+  <script>
+    function getParam(name) {
+      return decodeURIComponent(new URLSearchParams(window.location.search).get(name));
+    }
+
+    // عرض بيانات المنتج
+    document.getElementById('productName').textContent = getParam('name');
+    document.getElementById('productPrice').textContent = getParam('price') + "SAR";
+    document.getElementById('productImage').src = getParam('img');
+    document.getElementById('productDesc').textContent = getParam('desc');
+
+    function addToFavorites() {
+      const product = {
+        name: getParam('name'),
+        price: getParam('price') + "SAR",
+        image: getParam('img')
+      };
+
+      let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+      const exists = favorites.some(p => p.name === product.name);
+
+      if (!exists) {
+        favorites.push(product);
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+        alert(product.name + " added to favorites!");
+        document.querySelector('.favorite-btn').classList.add('active');
+        document.querySelector('.favorite-btn').innerHTML = "❤️ Added to Favorites";
+      } else {
+        alert(product.name + " is already in your favorites!");
+      }
+    }
+
+    function addToCart() {
+      const product = {
+        name: getParam('name'),
+        price: getParam('price') + "SAR",
+        image: getParam('img')
+      };
+
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.push(product);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      alert(product.name + " added to cart!");
+    }
+  </script>
+
+</body>
+</html>

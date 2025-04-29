@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sign Up</title>
+  <style>
+    body {
+      background-color: #f8f4e3;
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: #f8f4e3;
+      padding: 20px;
+      width: 300px;
+      text-align: center;
+    }
+    input[type="email"], input[type="password"],[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    input.invalid {
+      border-color: red;
+    }
+    .error-message {
+      color: red;
+      font-size: 12px;
+      text-align: left;
+      margin-bottom: 8px;
+    }
+    button {
+      background: black;
+      color: white;
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 25px;
+      font-size: 16px;
+      margin-top: 15px;
+      cursor: pointer;
+    }
+    .social-button {
+      margin-top: 15px;
+      display: flex;
+      align-items: center;
+      background: white;
+      padding: 8px;
+      border: 1px solid #000;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 14px;
+      justify-content: center;
+    }
+    .social-button img {
+      width: 20px;
+      margin-right: 10px;
+    }
+    .small-text {
+      font-size: 12px;
+      margin-top: 15px;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Welcome !</h1>
+    <p>Create your account to login</p>
+  
+  <form id="signupForm">
+    <input type="text" id="Fname" placeholder="Fname">
+    <div id="Fname" class="error-message"></div>
+
+    <input type="text" id="Lname" placeholder="Lname">
+    <div id="Lname" class="error-message"></div>
+    
+    <input type="email" id="email" placeholder="Email">
+    <div id="emailError" class="error-message"></div>
+
+    <input type="password" id="password" placeholder="Password">
+    <div id="passwordError" class="error-message"></div>
+
+    <button type="submit">Sign Up</button>
+  </form>
+
+  <div class="small-text">Or continue by use</div>
+
+  <div class="social-button">
+    <img src="https://img.icons8.com/color/48/000000/google-logo.png" alt="Google">
+    Continue with Google
+  </div>
+
+  <div class="social-button">
+    <img src="https://img.icons8.com/ios-filled/50/000000/mac-os.png" alt="Apple">
+    Continue with Apple
+  </div>
+
+  <div class="social-button">
+    <img src="https://img.icons8.com/ios-filled/50/000000/facebook-new.png" alt="Facebook">
+    Continue with Facebook
+  </div>
+
+  <div class="small-text">
+    Already have an account? <a href="registration.html">Log In</a>
+  </div>
+</div>
+
+<script>
+  const form = document.getElementById('signupForm');
+  const emailInput = document.getElementById('email');
+  const passwordInput = document.getElementById('password');
+  const emailError = document.getElementById('emailError');
+  const passwordError = document.getElementById('passwordError');
+
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
+    let valid = true;
+
+    // Email validation
+    if (!emailInput.value.includes('@')) {
+      emailError.textContent = "Invalid email address";
+      emailInput.classList.add('invalid');
+      valid = false;
+    } else {
+      emailError.textContent = "";
+      emailInput.classList.remove('invalid');
+    }
+
+    // Password validation
+    if (passwordInput.value.length < 8) {
+      passwordError.textContent = "Password must be at least 8 characters";
+      passwordInput.classList.add('invalid');
+      valid = false;
+    } else {
+      passwordError.textContent = "";
+      passwordInput.classList.remove('invalid');
+    }
+
+    if (valid) {
+      alert('Account created successfully!');
+      form.reset();
+      redirectToHome(); // ← هذا هو السطر الذي يوجه المستخدم للصفحة home.html
+    }
+  });
+
+  function redirectToHome() {
+    window.location.href = "home.html";
+  }
+</script>
+
+</body>
+</html>
