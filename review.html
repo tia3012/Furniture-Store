@@ -104,7 +104,6 @@
     <div class="section">
       <h2>Order Summary</h2>
       <div class="order-summary" id="order-summary">
-        <!-- Items will be inserted here -->
       </div>
     </div>
 
@@ -120,7 +119,6 @@
       const paymentMethod = paymentInfo.paymentMethod || "Unknown";
       document.getElementById('payment-method').innerText = `${paymentMethod} ${paymentInfo.cardNumber ? paymentInfo.cardNumber.slice(-4) : ''}`;
 
-      // Show order summary
       const orderSummary = document.getElementById('order-summary');
       let total = 0;
 
@@ -130,13 +128,13 @@
 
         const itemDiv = document.createElement('div');
         itemDiv.className = 'summary-item';
-        itemDiv.innerHTML = `<span>${item.name}</span><span>SAR ${price.toFixed(2)}</span>`;
+        itemDiv.innerHTML = `<span>${item.name}</span><span>OMR ${price.toFixed(2)}</span>`;
         orderSummary.appendChild(itemDiv);
       });
 
       const totalDiv = document.createElement('div');
       totalDiv.className = 'total';
-      totalDiv.innerHTML = `<span>Total: </span><span>SAR ${total.toFixed(2)}</span>`;
+      totalDiv.innerHTML = `<span>Total: </span><span>OMR ${total.toFixed(2)}</span>`;
       orderSummary.appendChild(totalDiv);
     }
 
@@ -151,7 +149,6 @@
       window.location.href = "home.html"; 
     }
 
-    // Load details on page load
     window.onload = loadOrderDetails;
   </script>
 

@@ -181,14 +181,14 @@ nav a.active {
 
     // عرض بيانات المنتج
     document.getElementById('productName').textContent = getParam('name');
-    document.getElementById('productPrice').textContent = getParam('price') + "SAR";
+    document.getElementById('productPrice').textContent = getParam('price') + "OMR";
     document.getElementById('productImage').src = getParam('img');
     document.getElementById('productDesc').textContent = getParam('desc');
 
     function addToFavorites() {
       const product = {
         name: getParam('name'),
-        price: getParam('price') + "SAR",
+        price: getParam('price') + "OMR",
         image: getParam('img')
       };
 
@@ -210,7 +210,7 @@ nav a.active {
     function addToCart() {
       const product = {
         name: getParam('name'),
-        price: getParam('price') + "SAR",
+        price: getParam('price') + "OMR",
         image: getParam('img')
       };
 

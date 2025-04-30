@@ -178,7 +178,7 @@
   <div class="container">
     <h1>Your Cart</h1>
     <div id="cartItemsContainer"></div>
-    <div class="total-price" id="totalPrice">Total: SAR 0</div>
+    <div class="total-price" id="totalPrice">Total: OMR 0</div>
     <div class="btn-container">
       <button class="btn" onclick="continueShopping()">🛍️ Continue Shopping</button>
       <button class="btn" onclick="proceedToPayment()">💳 Proceed to Payment</button>
@@ -222,7 +222,7 @@
         container.innerHTML += itemHTML;
       });
 
-      totalPriceEl.textContent = `Total: SAR ${total.toFixed(2)}`;
+      totalPriceEl.textContent = `Total: OMR ${total.toFixed(2)}`;
     }
 
     function removeFromCart(index) {
